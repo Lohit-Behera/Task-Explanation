@@ -1,9 +1,30 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
+
+import Layout from "./Layout";
+import HomePage from "./pages/HomePage";
+import CreateUser from "./pages/CreateUser";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<HomePage />} />
+      <Route path="/create" element={<CreateUser />} />
+    </Route>
+  )
+);
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <h1 className="text-3xl text-center font-bold">New Project</h1>
+      <Toaster richColors />
+      <RouterProvider router={router}></RouterProvider>
     </ThemeProvider>
   );
 }
