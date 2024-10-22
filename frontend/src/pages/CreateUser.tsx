@@ -31,7 +31,7 @@ const CreateUserSchema = z.object({
       message: "Avatar is required.",
     })
     .refine((file) => file?.size <= 3 * 1024 * 1024, {
-      message: "Avatar size must be less than 5MB.",
+      message: "Avatar size must be less than 3MB.",
     })
     .refine(
       (file) => ["image/jpeg", "image/png", "image/gif"].includes(file?.type),
