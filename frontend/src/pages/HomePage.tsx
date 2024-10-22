@@ -21,7 +21,7 @@ import { ChevronDown } from "lucide-react";
 import History from "@/components/History";
 import UserLoader from "@/components/Loader/UserLoader";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import crown from "@/assets/crown.png";
 type User = {
   _id: string;
   name: string;
@@ -90,8 +90,8 @@ function HomePage() {
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                   <img
                     className="w-14 h-14 mx-auto animate-[bounce_2s_infinite_ease-in-out]"
-                    src="https://img.icons8.com/?size=100&id=13728&format=png&color=000000"
-                    alt=""
+                    src={crown}
+                    alt="crown"
                   />
                   <Avatar className="w-28 h-28 outline outline-4 outline-primary">
                     <AvatarImage src={rankOne?.avatar ? rankOne.avatar : ""} />
