@@ -1,4 +1,4 @@
-# Task Explanation
+# W3
 
 ## API Endpoints
 
@@ -37,8 +37,8 @@ In frontend Folder
 Clone the repository:
 
 ```bash
-  git clone https://github.com/Lohit-Behera/Task-Explanation.git
-  cd Task-Explanation
+  git clone https://github.com/Lohit-Behera/w3.git
+  cd w3
 ```
 
 **Running using [Docker](https://www.docker.com/)**
@@ -56,8 +56,8 @@ Then go to [localhost:5173](http://localhost:5173/) for frontend and [localhost:
 Clone the repository:
 
 ```bash
-  git clone https://github.com/Lohit-Behera/Task-Explanation.git
-  cd Task-Explanation
+  git clone https://github.com/Lohit-Behera/w3.git
+  cd w3
 ```
 
 Now change directory to backend
@@ -83,7 +83,7 @@ In another terminal for React js
 Now change directory to frontend
 
 ```bash
-  cd Task-Explanation
+  cd w3
   cd frontend
 ```
 
