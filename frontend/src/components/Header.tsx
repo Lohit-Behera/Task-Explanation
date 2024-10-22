@@ -1,6 +1,6 @@
 import { ModeToggle } from "./mode-toggle";
 import Logo from "../assets/Logo.svg";
-import { Home } from "lucide-react";
+import { Home, SquarePlus } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 
@@ -15,6 +15,13 @@ function Header() {
               <Button variant={isActive ? "default" : "ghost"} size="sm">
                 <Home className="mr-0.5 h-4 w-4" />
                 Home
+              </Button>
+            )}
+          </NavLink>
+          <NavLink to="/create">
+            {({ isActive }) => (
+              <Button variant={isActive ? "default" : "ghost"} size="sm">
+                <SquarePlus className="mr-0.5 h-4 w-4" /> Create
               </Button>
             )}
           </NavLink>

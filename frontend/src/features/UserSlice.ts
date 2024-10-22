@@ -48,6 +48,27 @@ export const fetchAllUsers = createAsyncThunk(
   }
 );
 
+export const fetchTopUsers = createAsyncThunk(
+  "user/fetchTopUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await axios.get(`${baseUrl}/api/users/get/top`, config);
+      return response.data;
+    } catch (error: any) {
+      const errorMessage =
+        error.response && error.response.data
+          ? error.response.data.message
+          : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -55,9 +76,13 @@ const userSlice = createSlice({
     createUserStatus: "idle",
     createUserError: {},
 
-    allUsers: [],
+    allUsers: { data: [] },
     allUsersStatus: "idle",
     allUsersError: {},
+
+    topUsers: { data: [] },
+    topUsersStatus: "idle",
+    topUsersError: {},
   },
   reducers: {
     resetCreateUser: (state) => {
@@ -90,6 +115,18 @@ const userSlice = createSlice({
       .addCase(fetchAllUsers.rejected, (state, action) => {
         state.allUsersStatus = "failed";
         state.allUsersError = action.payload || "fetch all users failed";
+      })
+
+      .addCase(fetchTopUsers.pending, (state) => {
+        state.topUsersStatus = "loading";
+      })
+      .addCase(fetchTopUsers.fulfilled, (state, action) => {
+        state.topUsersStatus = "succeeded";
+        state.topUsers = action.payload;
+      })
+      .addCase(fetchTopUsers.rejected, (state, action) => {
+        state.topUsersStatus = "failed";
+        state.topUsersError = action.payload || "fetch top users failed";
       });
   },
 });

@@ -27,7 +27,7 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 const listUsers = asyncHandler(async (req, res) => {
-    const users = await User.find().sort({ createdAt: -1 });
+    const users = await User.find().sort({ name: 1 });
     res.status(200).json(new ApiResponse(200, users, "Users fetched successfully"));
 });
 
@@ -35,7 +35,6 @@ const topUsers = asyncHandler(async (req, res) => {
     const users = await User.find().sort({ totalPoints: -1 }).limit(10);
     res.status(200).json(new ApiResponse(200, users, "Top users fetched successfully"));
 });
-
 
 export {
     createUser,

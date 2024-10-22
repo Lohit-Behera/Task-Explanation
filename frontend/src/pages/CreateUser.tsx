@@ -58,6 +58,7 @@ function CreateUser() {
     toast.promise(createUserPromise, {
       loading: "Creating...",
       success: (data: any) => {
+        form.reset();
         return data.message || "User created successfully!";
       },
       error: (error: any) => {

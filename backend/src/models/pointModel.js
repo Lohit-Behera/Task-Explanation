@@ -12,6 +12,9 @@ const pointSchema = new Schema(
             required: true,
             default: 0
         }
+    },
+    {
+        timestamps: true,
     }
 );
 
