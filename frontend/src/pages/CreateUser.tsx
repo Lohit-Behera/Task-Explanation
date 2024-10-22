@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,6 +43,7 @@ const CreateUserSchema = z.object({
 
 function CreateUser() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof CreateUserSchema>>({
     resolver: zodResolver(CreateUserSchema),
     defaultValues: {
@@ -52,12 +53,11 @@ function CreateUser() {
   });
 
   function onSubmit(values: z.infer<typeof CreateUserSchema>) {
-    console.log(values);
-
     const createUserPromise = dispatch(fetchCreateUser(values)).unwrap();
     toast.promise(createUserPromise, {
       loading: "Creating...",
       success: (data: any) => {
+        navigate("/");
         form.reset();
         return data.message || "User created successfully!";
       },

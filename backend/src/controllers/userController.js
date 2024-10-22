@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/userModel.js";
 import { uploadFile } from "../utils/cloudinary.js";
+import { Point } from "../models/pointModel.js";
 
 const createUser = asyncHandler(async (req, res) => {
     const { name } = req.body;
@@ -36,8 +37,23 @@ const topUsers = asyncHandler(async (req, res) => {
     res.status(200).json(new ApiResponse(200, users, "Top users fetched successfully"));
 });
 
+const claimHistory = asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json(new ApiResponse(404, {}, "User not found"));
+    }
+    const claimHistory = await Point.find({ user: user._id }).sort({ createdAt: -1 });
+
+    if (!claimHistory) {
+        return res.status(404).json(new ApiResponse(404, {}, "No claim history found"));
+    }
+    res.status(200).json(new ApiResponse(200, {user, claimHistory}, "User fetched successfully"));
+});
+
 export {
     createUser,
     listUsers,
-    topUsers
+    topUsers,
+    claimHistory
 }

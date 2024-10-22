@@ -5,8 +5,6 @@ import { baseUrl } from "./Proxy";
 export const fetchAddPoints = createAsyncThunk(
   "points/fetchAddPoints",
   async (userId: string, { rejectWithValue }) => {
-    console.log(userId);
-
     try {
       const config = {
         headers: {

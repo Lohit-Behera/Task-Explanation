@@ -28,6 +28,26 @@ function Header() {
           <ModeToggle />
         </div>
       </nav>
+      <nav className="md:hidden flex justify-between space-x-2">
+        <img src={Logo} alt="Logo" className="w-10 h-10" />
+        <div className="flex space-x-2 items-center">
+          <NavLink to="/">
+            {({ isActive }) => (
+              <Button variant={isActive ? "default" : "ghost"} size="icon">
+                <Home />
+              </Button>
+            )}
+          </NavLink>
+          <NavLink to="/create">
+            {({ isActive }) => (
+              <Button variant={isActive ? "default" : "ghost"} size="icon">
+                <SquarePlus />
+              </Button>
+            )}
+          </NavLink>
+          <ModeToggle />
+        </div>
+      </nav>
     </header>
   );
 }

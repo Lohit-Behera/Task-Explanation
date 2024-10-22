@@ -69,6 +69,30 @@ export const fetchTopUsers = createAsyncThunk(
   }
 );
 
+export const fetchHistory = createAsyncThunk(
+  "user/fetchHistory",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await axios.get(
+        `${baseUrl}/api/users/history/${userId}`,
+        config
+      );
+      return response.data;
+    } catch (error: any) {
+      const errorMessage =
+        error.response && error.response.data
+          ? error.response.data.message
+          : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -83,6 +107,10 @@ const userSlice = createSlice({
     topUsers: { data: [] },
     topUsersStatus: "idle",
     topUsersError: {},
+
+    history: { data: { user: {}, claimHistory: [] } },
+    historyStatus: "idle",
+    historyError: {},
   },
   reducers: {
     resetCreateUser: (state) => {
@@ -127,6 +155,18 @@ const userSlice = createSlice({
       .addCase(fetchTopUsers.rejected, (state, action) => {
         state.topUsersStatus = "failed";
         state.topUsersError = action.payload || "fetch top users failed";
+      })
+
+      .addCase(fetchHistory.pending, (state) => {
+        state.historyStatus = "loading";
+      })
+      .addCase(fetchHistory.fulfilled, (state, action) => {
+        state.historyStatus = "succeeded";
+        state.history = action.payload;
+      })
+      .addCase(fetchHistory.rejected, (state, action) => {
+        state.historyStatus = "failed";
+        state.historyError = action.payload || "fetch history failed";
       });
   },
 });

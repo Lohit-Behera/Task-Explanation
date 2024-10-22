@@ -6,8 +6,6 @@ import { User } from "../models/userModel.js";
 const addPoints = asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const randomPoints = Math.floor(Math.random() * 10) + 1;
-    console.log(randomPoints);
-    
     if (!userId) {
         return res.status(400).json(new ApiResponse(400, {}, "Please provide userId"));
     }
