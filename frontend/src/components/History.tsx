@@ -54,7 +54,9 @@ function History({
           {historyStatus === "loading" ? (
             <HistoryLoader />
           ) : historyStatus === "failed" ? (
-            <p>Error</p>
+            <p className="text-center text-xl font-semibold">
+              Something went wrong Try Reloading
+            </p>
           ) : historyStatus === "succeeded" ? (
             <>
               <div className="flex space-x-2 bg-muted rounded-lg p-2 my-4">

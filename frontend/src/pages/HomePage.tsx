@@ -40,9 +40,12 @@ function HomePage() {
   const allUsersStatus = useSelector(
     (state: RootState) => state.user.allUsersStatus
   );
-
   const topUsers = useSelector((state: RootState) => state.user.topUsers);
   const topUserData: User[] = topUsers.data || [];
+  const rankOne = topUserData[0] || {};
+  const rankTwo = topUserData[1] || {};
+  const rankThree = topUserData[2] || {};
+
   const topUsersStatus = useSelector(
     (state: RootState) => state.user.topUsersStatus
   );
@@ -79,7 +82,7 @@ function HomePage() {
             <UserLoader />
           ) : topUsersStatus === "failed" ? (
             <p className="text-center text-xl font-semibold">
-              Something went wrong
+              Something went wrong Try Reloading
             </p>
           ) : topUsersStatus === "succeeded" ? (
             <>
@@ -91,34 +94,32 @@ function HomePage() {
                     alt=""
                   />
                   <Avatar className="w-28 h-28 outline outline-4 outline-primary">
-                    <AvatarImage
-                      src={topUserData[0].avatar ? topUserData[0].avatar : ""}
-                    />
+                    <AvatarImage src={rankOne?.avatar ? rankOne.avatar : ""} />
                     <AvatarFallback>
-                      {topUserData[0].name || "A"}
+                      {rankOne.name ? rankOne.name : "A"}
                     </AvatarFallback>
                   </Avatar>
                   <p className="text-center mt-0.5">
-                    {topUserData[0].name || ""}
+                    {rankOne.name ? rankOne.name : ""}
                   </p>
                   <p className="text-center">
-                    {topUserData[0].totalPoints || ""}
+                    {rankOne.totalPoints ? rankOne.totalPoints : ""}
                   </p>
                 </div>
                 <div className="absolute left-3/4 top-1/2 -translate-x-1/2 -translate-y-1/2 bottom-0 -z-10">
                   <p className="text-center">2</p>
                   <ChevronDown className="w-5 h-5 mx-auto" />
                   <Avatar className="w-24 h-24 opacity-80">
-                    <AvatarImage
-                      src={topUserData[1].avatar ? topUserData[1].avatar : ""}
-                    />
+                    <AvatarImage src={rankTwo.avatar ? rankTwo.avatar : ""} />
                     <AvatarFallback>
-                      {topUserData[1].name || "A"}
+                      {rankTwo.name ? rankTwo.name : "A"}
                     </AvatarFallback>
                   </Avatar>
-                  <p className="text-center">{topUserData[1].name || ""}</p>
                   <p className="text-center">
-                    {topUserData[1].totalPoints || ""}
+                    {rankTwo.name ? rankTwo.name : ""}
+                  </p>
+                  <p className="text-center">
+                    {rankTwo.totalPoints ? rankTwo.totalPoints : ""}
                   </p>
                 </div>
                 <div className="absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 bottom-0 -z-10">
@@ -126,15 +127,17 @@ function HomePage() {
                   <ChevronDown className="w-5 h-5 mx-auto" />
                   <Avatar className="w-24 h-24 opacity-80">
                     <AvatarImage
-                      src={topUserData[2].avatar ? topUserData[2].avatar : ""}
+                      src={rankThree.avatar ? rankThree.avatar : ""}
                     />
                     <AvatarFallback>
-                      {topUserData[2].name || "A"}
+                      {rankThree.name ? rankThree.name : "A"}
                     </AvatarFallback>
                   </Avatar>
-                  <p className="text-center">{topUserData[2].name || ""}</p>
                   <p className="text-center">
-                    {topUserData[2].totalPoints || ""}
+                    {rankThree.name ? rankThree.name : ""}
+                  </p>
+                  <p className="text-center">
+                    {rankThree.totalPoints ? rankThree.totalPoints : ""}
                   </p>
                 </div>
               </div>
@@ -147,7 +150,7 @@ function HomePage() {
                     >
                       <div className="flex space-x-2 my-auto w-1/2">
                         <Avatar>
-                          <AvatarImage src={user.avatar} />
+                          <AvatarImage src={user.avatar ? user.avatar : ""} />
                           <AvatarFallback>
                             {user.name[0] ? user.name[0].toUpperCase() : "A"}
                           </AvatarFallback>
@@ -180,7 +183,7 @@ function HomePage() {
             <UserLoader />
           ) : allUsersStatus === "failed" ? (
             <p className="text-center text-xl font-semibold">
-              Something went wrong
+              Something went wrong Try Reloading
             </p>
           ) : allUsersStatus === "succeeded" ? (
             <ScrollArea className="max-h-[600px] md:max-h-[640px] h-full w-full overflow-y-auto p-4">
@@ -194,7 +197,7 @@ function HomePage() {
                       <History
                         trigger={
                           <Avatar className="outline-primary hover:outline outline-offset-2">
-                            <AvatarImage src={user.avatar} />
+                            <AvatarImage src={user.avatar ? user.avatar : ""} />
                             <AvatarFallback>
                               {user.name[0] ? user.name[0].toUpperCase() : "A"}
                             </AvatarFallback>

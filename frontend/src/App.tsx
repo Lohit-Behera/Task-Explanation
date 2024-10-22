@@ -10,10 +10,12 @@ import { Toaster } from "@/components/ui/sonner";
 import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import CreateUser from "./pages/CreateUser";
+import PageNotFound from "./pages/Error/PageNotFound";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      <Route path="*" element={<PageNotFound />} />
       <Route index element={<HomePage />} />
       <Route path="/create" element={<CreateUser />} />
     </Route>
